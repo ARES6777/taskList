@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etsy Clone</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    /* ძირითადი სტილები */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    /* თავფურცელი */
+    header {
+      background-color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #F1641E;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .categories {
+      position: relative;
+    }
+
+    .categories button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #5b5b5b;
+      cursor: pointer;
+    }
+
+    .categories button:hover {
+      color: #333;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 10px;
+      list-style: none;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .dropdown li {
+      padding: 5px 10px;
+      cursor: pointer;
+      color: #5b5b5b;
+    }
+
+    .dropdown li:hover {
+      background-color: #f5f5f5;
+    }
+
+    .categories:hover .dropdown {
+      display: block;
+    }
+
+    /* ძებნის ველი */
+    .search-bar {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* ღილაკები მარჯვნივ */
+    .icon-section a {
+      text-decoration: none;
+      color: #5b5b5b;
+      font-size: 18px;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    .icon-section a:hover {
+      color: #333;
+    }
+
+    /* Popup-ის overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Popup კონტეინერი */
+    .popup {
+      background-color: white;
+      padding: 20px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    /* დახურვის ღილაკი */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* ფორმის სტილები */
+    .popup h2 {
+      margin-top: 0;
+    }
+
+    .popup input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .popup button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #555;
+    }
+
+    .popup .alt-login {
+      margin: 20px 0 10px;
+      text-align: center;
+      color: #888;
+    }
+
+    .popup .social-login button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .popup .social-login button:hover {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Etsy</div>
+
+    <nav>
+      <div class="categories">
+        <button>Categories</button>
+        <ul class="dropdown">
+          <li>Accessories</li>
+          <li>Art & Collectibles</li>
+          <li>Baby</li>
+          <li>Bags & Purses</li>
+          <li>Bath & Beauty</li>
+          <li>Books, Movies & Music</li>
+          <li>Clothing</li>
+          <li>Craft Supplies & Tools</li>
+          <li>Electronics & Accessories</li>
+          <li>Gifts</li>
+          <li>Home & Living</li>
+          <li>Jewelry</li>
+        </ul>
+      </div>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for anything">
+    </div>
+    <div class="icon-section">
+      <a href="#" id="signInBtn">Sign In</a>
+      <a href="#"><i class="fas fa-heart"></i></a>
+      
+      <a href="#"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+
+
+    
+    
+  </header>
+
+  <div style="background-color: white; padding: 10px 20px; border-bottom: 1px solid #ddd;">
+    <nav style="display: flex; justify-content: center; gap: 30px; font-family: Arial, sans-serif; font-size: 14px; color: #5b5b5b;">
+      <a href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+        <i class="fas fa-gift" style="margin-right: 5px;"></i> Gifts
+      </a>
+      <a href="#" style="text-decoration: none; color: inherit;">Valentine's Day Gifts</a>
+      <a href="#" style="text-decoration: none; color: inherit;">Home Favorites</a>
+      <a href="#" style="text-decoration: none; color: inherit;">Fashion Finds</a>
+      <a href="#" style="text-decoration: none; color: inherit;">Registry</a>
+    </nav>
+  </div>
+  <!-- Popup Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="popup">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      <h2>Sign in</h2>
+      <input type="email" placeholder="Email address" required>
+      <input type="password" placeholder="Password" required>
+      <div>
+        <input type="checkbox" id="staySignedIn">
+        <label for="staySignedIn">Stay signed in</label>
+      </div>
+      <button>Sign In</button>
+      <div class="alt-login">OR</div>
+      <div class="social-login">
+        <button>Continue with Google</button>
+        <button>Continue with Facebook</button>
+        <button>Continue with Apple</button>
+      </div>
+    </div>
+  </div>
+ 
+
+  <script>
+    // ელემენტების დაკავშირება
+    const signInBtn = document.getElementById('signInBtn');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // "Sign In" ღილაკზე დაჭერა
+    signInBtn.addEventListener('click', () => {
+      overlay.style.display = 'flex';
+    });
+
+    // Popup-ის დახურვა
+    closeBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    // Overlay-ს დაჭერა და დახურვა
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+      }
+    });
+
+     // ვპოულობთ "Favorites" ღილაკს
+     const favoritesButton = document.getElementById('favorites-button');
+
+// ვამატებთ Event Listener-ს, რომ გადაგვიყვანოს ახალ გვერდზე
+favoritesButton.addEventListener('click', function (event) {
+    event.preventDefault(); // თავიდან აიცილოს ნაგულისხმევი ქმედება
+    window.location.href = "favorites.html"; // გადამისამართება "favorites.html"-ზე
+});
+  
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etsy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #F37E44;
+            padding: 10px 20px;
+            text-align: right;
+            color: white;
+            font-size: 24px;
+        }
+
+        nav {
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+            font-size: 18px;
+            color: #999999;
+            cursor: pointer;
+        }
+
+        nav ul li:hover {
+            color: #555;
+        }
+
+        .icon-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-section a {
+            color: #999999;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .icon-section a:hover {
+            color: #555;
+        }
+
+        /* მთავარი და ფავორიტების სექციები */
+        .section {
+            display: none; /* დამალული სექციები */
+            padding: 20px;
+        }
+
+        #mainSection {
+            display: block; /* მთავარი სექცია ჩანს სტარტზე */
+        }
+
+        h1 {
+            color: #F37E44;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- სათაური -->
+    <header>
+        Etsy
+    </header>
+
+    <!-- ნავიგაცია -->
+    <nav>
+        <ul>
+            <li id="categoriesBtn">Categories</li>
+            <li>Valentine's Day Gifts</li>
+            <li>Home Favorites</li>
+            <li>Fashion Finds</li>
+            <li>Registry</li>
+        </ul>
+        <div class="icon-section">
+            <a href="#" id="favoritesBtn">
+                ❤️ Favorites
+            </a>
+        </div>
+    </nav>
+
+    <!-- მთავარი სექცია -->
+    <div id="mainSection" class="section">
+        <h1>Welcome to Etsy</h1>
+        <p>Discover unique handmade goods and vintage treasures!</p>
+    </div>
+
+    <!-- ფავორიტების სექცია -->
+    <div id="favoritesSection" class="section">
+        <h1>Your Favorite Items</h1>
+        <p>Nothing here yet... Start adding your favorite items!</p>
+    </div>
+
+    <script>
+        // სექციების ჩვენება/დამალვა
+        const mainSection = document.getElementById('mainSection');
+        const favoritesSection = document.getElementById('favoritesSection');
+
+        // "Favorites" ღილაკზე დაჭერა
+        document.getElementById('favoritesBtn').addEventListener('click', function (event) {
+            event.preventDefault(); // ბმულის ფუნქციონალი ჩავახშოთ
+            mainSection.style.display = 'none';
+            favoritesSection.style.display = 'block';
+        });
+
+        // "Categories" ღილაკზე დაჭერა (თუ დაგჭირდებათ სხვა სექციის დაბრუნება)
+        document.getElementById('categoriesBtn').addEventListener('click', function () {
+            favoritesSection.style.display = 'none';
+            mainSection.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
