@@ -30,6 +30,7 @@
       font-size: 24px;
       font-weight: bold;
       color: #F1641E;
+      cursor: pointer;
     }
 
     nav {
@@ -186,12 +187,49 @@
     .popup .social-login button:hover {
       background-color: #eaeaea;
     }
+
+    /* Find a Registry ფორმის სტილები */
+    #find-registry-form .popup {
+      background-color: white;
+      padding: 20px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    #find-registry-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    #find-registry-form button {
+      flex-grow: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #find-registry-form button[type="submit"] {
+      background-color: #F1641E;
+      color: white;
+    }
+
+    #find-registry-form button[type="button"] {
+      background-color: #ddd;
+      color: #333;
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
-    <div class="logo">Etsy</div>
+    <div class="logo" id="home-button">Etsy</div>
 
     <nav>
       <div class="categories">
@@ -217,27 +255,23 @@
     </div>
     <div class="icon-section">
       <a href="#" id="signInBtn">Sign In</a>
-      <a href="#"><i class="fas fa-heart"></i></a>
-      
-      <a href="#"><i class="fas fa-shopping-cart"></i></a>
+      <a href="#" id="favorites-button"><i class="fas fa-heart"></i></a>
+      <a href="#" id="cart-button"><i class="fas fa-shopping-cart"></i></a>
     </div>
-
-
-    
-    
   </header>
 
   <div style="background-color: white; padding: 10px 20px; border-bottom: 1px solid #ddd;">
     <nav style="display: flex; justify-content: center; gap: 30px; font-family: Arial, sans-serif; font-size: 14px; color: #5b5b5b;">
-      <a href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+      <a href="#" id="gifts-button" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
         <i class="fas fa-gift" style="margin-right: 5px;"></i> Gifts
       </a>
-      <a href="#" style="text-decoration: none; color: inherit;">Valentine's Day Gifts</a>
-      <a href="#" style="text-decoration: none; color: inherit;">Home Favorites</a>
-      <a href="#" style="text-decoration: none; color: inherit;">Fashion Finds</a>
-      <a href="#" style="text-decoration: none; color: inherit;">Registry</a>
+      <a href="#" id="valentine-gifts-button" style="text-decoration: none; color: inherit;">Valentine's Day Gifts</a>
+      <a href="#home-favorites" style="text-decoration: none; color: inherit;">Home Favorites</a>
+      <a href="#fashion-finds" style="text-decoration: none; color: inherit;">Fashion Finds</a>
+      <a href="#registry" style="text-decoration: none; color: inherit;">Registry</a>
     </nav>
   </div>
+
   <!-- Popup Overlay -->
   <div class="overlay" id="overlay">
     <div class="popup">
@@ -258,13 +292,95 @@
       </div>
     </div>
   </div>
- 
+
+  <!-- 🔹 მთავარი კონტენტი -->
+  <div id="main-content" style="text-align:center; padding:20px;">
+    <h2>Welcome to Etsy Clone</h2>
+    <p>Explore our amazing collections and save your favorites!</p>
+  </div>
+
+  <!-- 🔹 ფავორიტების სექცია -->
+  <div id="favorites-section" class="section" style="display: none;">
+    <h1>Favorite Items</h1>
+    <p>Sign in</p>
+    <p>Don't lose your faves! Sign in or create an account.</p>
+    <p>Guest favorites are only saved to your device for 7 days, or until you clear your cache.</p>
+  </div>
+
+  <!-- 🔹 კალათის სექცია -->
+  <div id="cart-section" class="section" style="display: none;">
+    <h1>Your Cart</h1>
+    <p>Buy confidently with Etsy's Purchase Protection program for buyers, get a full refund in the rare case your item doesn't arrive, arrives damaged, or isn't as described. See eligibility</p>
+    <p>Your cart is empty.</p>
+  </div>
+
+  <!-- 🔹 Gifts სექცია -->
+  <div id="gifts-section" class="section" style="display: none; text-align: center; padding: 20px;">
+    <h1>Extra-special gifting made extra-easy</h1>
+    <p>Discover perfect picks for the occasion!</p>
+  </div>
+
+  <!-- 🔹 Valentine's Day Gifts სექცია -->
+  <div id="valentine-gifts-section" class="section" style="display: none; text-align: center; padding: 20px;">
+    <h1>Gifts / Valentine's Day Gifts</h1>
+    <h2>Valentine's Day Gifts</h2>
+    <p>Love can't be late. Find gifts that ship in 3 days or less.</p>
+    <p>*Orders processed in up to 3 business days. Actual delivery times will vary.</p>
+  </div>
+
+  <!-- 🔹 Home Favorites სექცია -->
+  <div id="home-favorites-section" class="section" style="display: none; text-align: center; padding: 20px;">
+    <h1 style="font-size: 36px; text-transform: uppercase;">HOME FAVORITES</h1>
+    <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 0 auto;">
+      Be our guest! Time to spruce up your living space with affordable statement pieces, essential finds, and decor to adore.
+    </p>
+  </div>
+
+  <!-- 🔹 Fashion Finds სექცია -->
+  <div id="fashion-finds-section" class="section" style="display: none; text-align: center; padding: 20px;">
+    <h1 style="font-size: 36px; text-transform: uppercase;">FASHION FINDS</h1>
+    <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 0 auto;">
+      Time for a fresh start! Your best year yet begins with trending finds, vintage pieces, and stunning accessories for any budget.
+    </p>
+  </div>
+
+  <!-- 🔹 Registry სექცია -->
+  <div id="registry-section" class="section" style="display: none; text-align: center; padding: 20px;">
+    <h1 style="font-size: 36px; text-transform: uppercase;">Etsy Registry</h1>
+    <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 20px auto;">
+      Make every milestone meaningful with extra-special gifts.
+    </p>
+    <button style="padding: 10px 20px; font-size: 16px; background-color: #F1641E; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Find a registry
+    </button>
+  </div>
+
+  <!-- 🔹 Find a Registry ფორმა -->
+  <div id="find-registry-form" class="overlay" style="display: none;">
+    <div class="popup">
+      <span class="close-btn" id="closeRegistryForm">&times;</span>
+      <h2>Find a registry</h2>
+      <form id="registry-search-form">
+        <input type="text" id="first-name" placeholder="First name" required>
+        <input type="text" id="last-name" placeholder="Last name" required>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="button" id="cancel-registry-search" style="padding: 10px 20px; font-size: 16px; background-color: #ddd; color: #333; border: none; border-radius: 5px; cursor: pointer;">
+            Cancel
+          </button>
+          <button type="submit" style="padding: 10px 20px; font-size: 16px; background-color: #F1641E; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script>
     // ელემენტების დაკავშირება
     const signInBtn = document.getElementById('signInBtn');
     const overlay = document.getElementById('overlay');
     const closeBtn = document.getElementById('closeBtn');
+    const homeButton = document.getElementById('home-button');
 
     // "Sign In" ღილაკზე დაჭერა
     signInBtn.addEventListener('click', () => {
@@ -283,154 +399,93 @@
       }
     });
 
-     // ვპოულობთ "Favorites" ღილაკს
-     const favoritesButton = document.getElementById('favorites-button');
+    // სათაურზე დაჭერისას მთავარ გვერდზე დაბრუნება
+    homeButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      showSection("main-content");
+    });
 
-// ვამატებთ Event Listener-ს, რომ გადაგვიყვანოს ახალ გვერდზე
-favoritesButton.addEventListener('click', function (event) {
-    event.preventDefault(); // თავიდან აიცილოს ნაგულისხმევი ქმედება
-    window.location.href = "favorites.html"; // გადამისამართება "favorites.html"-ზე
-});
-  
+    function showSection(sectionId) {
+      document.getElementById("main-content").style.display = "none"; 
+      document.getElementById("favorites-section").style.display = "none"; 
+      document.getElementById("cart-section").style.display = "none"; 
+      document.getElementById("gifts-section").style.display = "none"; 
+      document.getElementById("valentine-gifts-section").style.display = "none"; 
+      document.getElementById("home-favorites-section").style.display = "none"; 
+      document.getElementById("fashion-finds-section").style.display = "none"; 
+      document.getElementById("registry-section").style.display = "none"; 
+      
+      document.getElementById(sectionId).style.display = "block";
+    }
+
+    // "Favorites" ღილაკზე დაჭერისას
+    document.getElementById("favorites-button").addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("favorites-section");
+    });
+
+    // "Cart" ღილაკზე დაჭერისას
+    document.getElementById("cart-button").addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("cart-section");
+    });
+
+    // "Gifts" ღილაკზე დაჭერისას
+    document.getElementById("gifts-button").addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("gifts-section");
+    });
+
+    // "Valentine's Day Gifts" ღილაკზე დაჭერისას
+    document.getElementById("valentine-gifts-button").addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("valentine-gifts-section");
+    });
+
+    // "Home Favorites" ღილაკზე დაჭერისას
+    document.querySelector('a[href="#home-favorites"]').addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("home-favorites-section");
+    });
+
+    // "Fashion Finds" ღილაკზე დაჭერისას
+    document.querySelector('a[href="#fashion-finds"]').addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("fashion-finds-section");
+    });
+
+    // "Registry" ღილაკზე დაჭერისას
+    document.querySelector('a[href="#registry"]').addEventListener("click", function(event) {
+      event.preventDefault();
+      showSection("registry-section");
+    });
+
+    // "Find a registry" ღილაკზე დაჭერისას
+    document.querySelector('#registry-section button').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('find-registry-form').style.display = 'flex';
+    });
+
+    // "Cancel" ღილაკზე დაჭერისას
+    document.getElementById('cancel-registry-search').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('find-registry-form').style.display = 'none';
+    });
+
+    // ფორმის დახურვა "X" ღილაკზე დაჭერისას
+    document.getElementById('closeRegistryForm').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('find-registry-form').style.display = 'none';
+    });
+
+    // ფორმის გაგზავნისას
+    document.getElementById('registry-search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      alert(`Searching for registry: ${firstName} ${lastName}`);
+      document.getElementById('find-registry-form').style.display = 'none';
+    });
   </script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etsy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #F37E44;
-            padding: 10px 20px;
-            text-align: right;
-            color: white;
-            font-size: 24px;
-        }
-
-        nav {
-            background-color: #f8f8f8;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-            font-size: 18px;
-            color: #999999;
-            cursor: pointer;
-        }
-
-        nav ul li:hover {
-            color: #555;
-        }
-
-        .icon-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .icon-section a {
-            color: #999999;
-            font-size: 18px;
-            text-decoration: none;
-        }
-
-        .icon-section a:hover {
-            color: #555;
-        }
-
-        /* მთავარი და ფავორიტების სექციები */
-        .section {
-            display: none; /* დამალული სექციები */
-            padding: 20px;
-        }
-
-        #mainSection {
-            display: block; /* მთავარი სექცია ჩანს სტარტზე */
-        }
-
-        h1 {
-            color: #F37E44;
-        }
-
-        p {
-            color: #333;
-            font-size: 18px;
-        }
-    </style>
-</head>
-<body>
-    <!-- სათაური -->
-    <header>
-        Etsy
-    </header>
-
-    <!-- ნავიგაცია -->
-    <nav>
-        <ul>
-            <li id="categoriesBtn">Categories</li>
-            <li>Valentine's Day Gifts</li>
-            <li>Home Favorites</li>
-            <li>Fashion Finds</li>
-            <li>Registry</li>
-        </ul>
-        <div class="icon-section">
-            <a href="#" id="favoritesBtn">
-                ❤️ Favorites
-            </a>
-        </div>
-    </nav>
-
-    <!-- მთავარი სექცია -->
-    <div id="mainSection" class="section">
-        <h1>Welcome to Etsy</h1>
-        <p>Discover unique handmade goods and vintage treasures!</p>
-    </div>
-
-    <!-- ფავორიტების სექცია -->
-    <div id="favoritesSection" class="section">
-        <h1>Your Favorite Items</h1>
-        <p>Nothing here yet... Start adding your favorite items!</p>
-    </div>
-
-    <script>
-        // სექციების ჩვენება/დამალვა
-        const mainSection = document.getElementById('mainSection');
-        const favoritesSection = document.getElementById('favoritesSection');
-
-        // "Favorites" ღილაკზე დაჭერა
-        document.getElementById('favoritesBtn').addEventListener('click', function (event) {
-            event.preventDefault(); // ბმულის ფუნქციონალი ჩავახშოთ
-            mainSection.style.display = 'none';
-            favoritesSection.style.display = 'block';
-        });
-
-        // "Categories" ღილაკზე დაჭერა (თუ დაგჭირდებათ სხვა სექციის დაბრუნება)
-        document.getElementById('categoriesBtn').addEventListener('click', function () {
-            favoritesSection.style.display = 'none';
-            mainSection.style.display = 'block';
-        });
-    </script>
 </body>
 </html>
