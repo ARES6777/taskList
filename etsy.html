@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <style>
-    /* ძირითადი სტილები */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -16,7 +15,6 @@
       background-color: #f5f5f5;
     }
 
-    /* თავფურცელი */
     header {
       background-color: white;
       padding: 15px 20px;
@@ -79,7 +77,6 @@
       display: block;
     }
 
-    /* ძებნის ველი */
     .search-bar {
       flex-grow: 1;
       display: flex;
@@ -94,7 +91,6 @@
       border-radius: 5px;
     }
 
-    /* ღილაკები მარჯვნივ */
     .icon-section a {
       text-decoration: none;
       color: #5b5b5b;
@@ -107,7 +103,6 @@
       color: #333;
     }
 
-    /* Popup-ის overlay */
     .overlay {
       position: fixed;
       top: 0;
@@ -120,7 +115,6 @@
       align-items: center;
     }
 
-    /* Popup კონტეინერი */
     .popup {
       background-color: white;
       padding: 20px;
@@ -130,7 +124,6 @@
       position: relative;
     }
 
-    /* დახურვის ღილაკი */
     .close-btn {
       position: absolute;
       top: 10px;
@@ -140,7 +133,6 @@
       color: #333;
     }
 
-    /* ფორმის სტილები */
     .popup h2 {
       margin-top: 0;
     }
@@ -188,7 +180,6 @@
       background-color: #eaeaea;
     }
 
-    /* Find a Registry ფორმის სტილები */
     #find-registry-form .popup {
       background-color: white;
       padding: 20px;
@@ -227,7 +218,7 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
+
   <header>
     <div class="logo" id="home-button">Etsy</div>
 
@@ -272,7 +263,6 @@
     </nav>
   </div>
 
-  <!-- Popup Overlay -->
   <div class="overlay" id="overlay">
     <div class="popup">
       <span class="close-btn" id="closeBtn">&times;</span>
@@ -293,13 +283,11 @@
     </div>
   </div>
 
-  <!-- 🔹 მთავარი კონტენტი -->
   <div id="main-content" style="text-align:center; padding:20px;">
     <h2>Welcome to Etsy Clone</h2>
     <p>Explore our amazing collections and save your favorites!</p>
   </div>
 
-  <!-- 🔹 ფავორიტების სექცია -->
   <div id="favorites-section" class="section" style="display: none;">
     <h1>Favorite Items</h1>
     <p>Sign in</p>
@@ -307,20 +295,17 @@
     <p>Guest favorites are only saved to your device for 7 days, or until you clear your cache.</p>
   </div>
 
-  <!-- 🔹 კალათის სექცია -->
   <div id="cart-section" class="section" style="display: none;">
     <h1>Your Cart</h1>
     <p>Buy confidently with Etsy's Purchase Protection program for buyers, get a full refund in the rare case your item doesn't arrive, arrives damaged, or isn't as described. See eligibility</p>
     <p>Your cart is empty.</p>
   </div>
 
-  <!-- 🔹 Gifts სექცია -->
   <div id="gifts-section" class="section" style="display: none; text-align: center; padding: 20px;">
     <h1>Extra-special gifting made extra-easy</h1>
     <p>Discover perfect picks for the occasion!</p>
   </div>
 
-  <!-- 🔹 Valentine's Day Gifts სექცია -->
   <div id="valentine-gifts-section" class="section" style="display: none; text-align: center; padding: 20px;">
     <h1>Gifts / Valentine's Day Gifts</h1>
     <h2>Valentine's Day Gifts</h2>
@@ -328,7 +313,6 @@
     <p>*Orders processed in up to 3 business days. Actual delivery times will vary.</p>
   </div>
 
-  <!-- 🔹 Home Favorites სექცია -->
   <div id="home-favorites-section" class="section" style="display: none; text-align: center; padding: 20px;">
     <h1 style="font-size: 36px; text-transform: uppercase;">HOME FAVORITES</h1>
     <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 0 auto;">
@@ -336,7 +320,6 @@
     </p>
   </div>
 
-  <!-- 🔹 Fashion Finds სექცია -->
   <div id="fashion-finds-section" class="section" style="display: none; text-align: center; padding: 20px;">
     <h1 style="font-size: 36px; text-transform: uppercase;">FASHION FINDS</h1>
     <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 0 auto;">
@@ -344,7 +327,6 @@
     </p>
   </div>
 
-  <!-- 🔹 Registry სექცია -->
   <div id="registry-section" class="section" style="display: none; text-align: center; padding: 20px;">
     <h1 style="font-size: 36px; text-transform: uppercase;">Etsy Registry</h1>
     <p style="font-size: 18px; color: #5b5b5b; max-width: 600px; margin: 20px auto;">
@@ -355,7 +337,6 @@
     </button>
   </div>
 
-  <!-- 🔹 Find a Registry ფორმა -->
   <div id="find-registry-form" class="overlay" style="display: none;">
     <div class="popup">
       <span class="close-btn" id="closeRegistryForm">&times;</span>
@@ -376,30 +357,27 @@
   </div>
 
   <script>
-    // ელემენტების დაკავშირება
+    
     const signInBtn = document.getElementById('signInBtn');
     const overlay = document.getElementById('overlay');
     const closeBtn = document.getElementById('closeBtn');
     const homeButton = document.getElementById('home-button');
 
-    // "Sign In" ღილაკზე დაჭერა
     signInBtn.addEventListener('click', () => {
       overlay.style.display = 'flex';
     });
 
-    // Popup-ის დახურვა
     closeBtn.addEventListener('click', () => {
       overlay.style.display = 'none';
     });
 
-    // Overlay-ს დაჭერა და დახურვა
+   
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.style.display = 'none';
       }
     });
 
-    // სათაურზე დაჭერისას მთავარ გვერდზე დაბრუნება
     homeButton.addEventListener('click', function(event) {
       event.preventDefault();
       showSection("main-content");
@@ -418,67 +396,61 @@
       document.getElementById(sectionId).style.display = "block";
     }
 
-    // "Favorites" ღილაკზე დაჭერისას
     document.getElementById("favorites-button").addEventListener("click", function(event) {
       event.preventDefault();
       showSection("favorites-section");
     });
 
-    // "Cart" ღილაკზე დაჭერისას
     document.getElementById("cart-button").addEventListener("click", function(event) {
       event.preventDefault();
       showSection("cart-section");
     });
 
-    // "Gifts" ღილაკზე დაჭერისას
+    
     document.getElementById("gifts-button").addEventListener("click", function(event) {
       event.preventDefault();
       showSection("gifts-section");
     });
 
-    // "Valentine's Day Gifts" ღილაკზე დაჭერისას
     document.getElementById("valentine-gifts-button").addEventListener("click", function(event) {
       event.preventDefault();
       showSection("valentine-gifts-section");
     });
 
-    // "Home Favorites" ღილაკზე დაჭერისას
     document.querySelector('a[href="#home-favorites"]').addEventListener("click", function(event) {
       event.preventDefault();
       showSection("home-favorites-section");
     });
 
-    // "Fashion Finds" ღილაკზე დაჭერისას
     document.querySelector('a[href="#fashion-finds"]').addEventListener("click", function(event) {
       event.preventDefault();
       showSection("fashion-finds-section");
     });
 
-    // "Registry" ღილაკზე დაჭერისას
+   
     document.querySelector('a[href="#registry"]').addEventListener("click", function(event) {
       event.preventDefault();
       showSection("registry-section");
     });
 
-    // "Find a registry" ღილაკზე დაჭერისას
+    
     document.querySelector('#registry-section button').addEventListener('click', function(event) {
       event.preventDefault();
       document.getElementById('find-registry-form').style.display = 'flex';
     });
 
-    // "Cancel" ღილაკზე დაჭერისას
+    
     document.getElementById('cancel-registry-search').addEventListener('click', function(event) {
       event.preventDefault();
       document.getElementById('find-registry-form').style.display = 'none';
     });
 
-    // ფორმის დახურვა "X" ღილაკზე დაჭერისას
+    
     document.getElementById('closeRegistryForm').addEventListener('click', function(event) {
       event.preventDefault();
       document.getElementById('find-registry-form').style.display = 'none';
     });
 
-    // ფორმის გაგზავნისას
     document.getElementById('registry-search-form').addEventListener('submit', function(event) {
       event.preventDefault();
       const firstName = document.getElementById('first-name').value;
